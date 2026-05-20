@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import profilePicture from "@images/profile_picture.jpg";
 import addButton from "@images/add-button.png";
 import Popup from "./Main/Popup/Popup";
@@ -7,8 +7,9 @@ import EdiProfile from "./Main/EditProfile/EditProfile";
 import EditAvatar from "./Main/EditAvatar/EditAvatar";
 import Card from "./Main/Card/Card";
 import ImagePopup from "./Main/ImagePopup/ImagePopup";
+import Api from "../utils/api";
 
-const cards = [
+/*const cards = [
   {
     isLiked: false,
     _id: '5d1f0611d321eb4bdcd707dd',
@@ -25,11 +26,12 @@ const cards = [
     owner: '5d1f0611d321eb4bdcd707dd',
     createdAt: '2019-07-05T08:11:58.324Z',
   },
-];
+];*/
 
 console.log(cards);
 
 export default function Main () {
+    const [cards, setCards] = useState([]);
     const [popup, setPopup] = useState(null);
     const newCardPopup = { title: "Nuevo lugar", children: <NewCard /> };
     const newEditProfilePopup = { title:"Editar perfil", children:<EdiProfile/> };
@@ -43,6 +45,14 @@ export default function Main () {
     function handleClickCard(card){
     handleOpenPopup({children:<ImagePopup card={card}/>});
     }
+  useEffect(() => {
+    (async () => {
+      await api
+        .getCardList()
+        .then((cards) => setCards(cards))
+        .catch((err) => console.error(err));
+    })();
+  }, []);
     return(
         <main className="content">
                 <section className="profile">
