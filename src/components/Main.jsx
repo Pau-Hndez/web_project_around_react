@@ -7,7 +7,7 @@ import EdiProfile from "./Main/EditProfile/EditProfile";
 import EditAvatar from "./Main/EditAvatar/EditAvatar";
 import Card from "./Main/Card/Card";
 import ImagePopup from "./Main/ImagePopup/ImagePopup";
-import Api from "../utils/api";
+import Api from "../utils/Api";
 
 /*const cards = [
   {
@@ -28,7 +28,7 @@ import Api from "../utils/api";
   },
 ];*/
 
-console.log(cards);
+
 
 export default function Main () {
     const [cards, setCards] = useState([]);
@@ -46,13 +46,15 @@ export default function Main () {
     handleOpenPopup({children:<ImagePopup card={card}/>});
     }
   useEffect(() => {
-    (async () => {
-      await api
-        .getCardList()
-        .then((cards) => setCards(cards))
-        .catch((err) => console.error(err));
-    })();
-  }, []);
+      (async () => {
+        await Api
+          .getCardList()
+          .then((cards) => setCards(cards))
+          .catch((err) => console.error(err));
+      })();
+    }, []);
+
+
     return(
         <main className="content">
                 <section className="profile">
