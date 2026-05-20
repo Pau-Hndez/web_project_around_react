@@ -1,4 +1,4 @@
-export default class Api {
+class Api {
   constructor(options) {
     this._baseUrl = options.baseUrl;
     this._headers = options.headers;
@@ -140,3 +140,13 @@ export default class Api {
       .catch((err) => console.log(err));
   }
 }
+
+const api = new Api({
+  baseUrl: "https://around-api.es.tripleten-services.com/v1",
+  headers: {
+    authorization: "0f55971b-c059-4ebb-9b77-a79df8314408",
+    "Content-Type": "application/json",
+  },
+});
+
+export default Api; 

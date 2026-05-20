@@ -48,7 +48,7 @@ export default function Main () {
   useEffect(() => {
       (async () => {
         await Api
-          .getCardList()
+          .getInitialCards()
           .then((cards) => setCards(cards))
           .catch((err) => console.error(err));
       })();
