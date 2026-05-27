@@ -1,5 +1,5 @@
 import { useState, useContext } from "react";
-import CurrentUserContext from "../../../context/CurrentUserContext";
+import CurrentUserContext from "../../../contexts/CurrentUserContext";
 
 export default function Popup(props) {
   const { onClose, title, children } = props;

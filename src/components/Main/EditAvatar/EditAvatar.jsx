@@ -1,5 +1,5 @@
 import { useContext, useRef } from "react";
-import CurrentUserContext from "../../../context/CurrentUserContext";
+import CurrentUserContext from "../../../contexts/CurrentUserContext";
 
 export default function EditAvatar() {
   const avatarRef = useRef();

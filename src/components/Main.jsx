@@ -8,7 +8,7 @@ import EditAvatar from "./Main/EditAvatar/EditAvatar";
 import Card from "./Main/Card/Card";
 import ImagePopup from "./Main/ImagePopup/ImagePopup";
 import api from "../utils/Api";
-import CurrentUserContext from "../context/CurrentUserContext";
+import CurrentUserContext from "../contexts/CurrentUserContext";
 
 export default function Main() {
   const newCardPopup = { title: "Nuevo lugar", children: <NewCard /> };
