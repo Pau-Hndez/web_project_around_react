@@ -1,6 +1,8 @@
+import { useState, useContext } from "react";
+import CurrentUserContext from "../../../context/CurrentUserContext";
+
 export default function Popup(props) {
- 
-  const { onClose, title, children} = props;
+  const { onClose, title, children } = props;
   return (
     <div className="popup">
       <div className="popup__content">

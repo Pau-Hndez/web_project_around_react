@@ -3,6 +3,7 @@ class Api {
     this._baseUrl = options.baseUrl;
     this._headers = options.headers;
   }
+  //ESTA ES MI API ORIGINAL
   //2.
   async getInitialCards() {
     return fetch(`${this._baseUrl}/cards/`, {
@@ -97,6 +98,7 @@ class Api {
       .catch((err) => console.log(err));
   }
   //8.
+
   async addLike(cardId) {
     return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
       method: "PUT",
@@ -118,6 +120,20 @@ class Api {
       if (res.ok) return res.json();
       return Promise.reject(`Error: ${res.status}`);
     });
+  }
+  async _makeRequest(endPoint, method) {
+    const options = {
+      method,
+      headers: this._headers,
+    };
+    const response = await fetch(`${this._baseUrl}${endPoint}`, options);
+    if (!response.ok) throw new Error(response.status);
+    return response.json();
+  }
+  async changeLikeCardStatus(cardId, isLiked) {
+    return isLiked
+      ? this._makeRequest(`/cards/${cardId}/likes`, "PUT")
+      : this._makeRequest(`/cards/${cardId}/likes`, "DELETE");
   }
   // 9.
   async editProfilePicture({ avatar }) {
@@ -149,4 +165,4 @@ const api = new Api({
   },
 });
 
-export default Api; 
+export default api;

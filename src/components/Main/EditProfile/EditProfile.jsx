@@ -1,29 +1,68 @@
-export default function EdiProfile() {
-    return(
-       <form className="popup__form" id="edit-profile-form" noValidate>
-          <input
-            id="name-input"
-            className="popup__input popup__input_type_name"
-            name="name"
-            placeholder="Nombre"
-            type="text"
-            required
-            minLength="2"
-            maxLength="40"
-          />
-          <span className="popup__input-error name-input-error"></span>
-          <input
-            id="description-input"
-            className="popup__input popup__input_type_description"
-            name="description"
-            placeholder="Acerca de mí"
-            type="text"
-            required
-            minLength="2"
-            maxLength="200"
-          />
-          <span className="popup__input-error description-input-error"></span>
-          <button className="popup__save" type="submit" disabled>Guardar</button>
-        </form> 
-    )
+import { useState, useContext } from "react";
+import CurrentUserContext from "../../../context/CurrentUserContext";
+
+export default function EditProfile() {
+  const userContext = useContext(CurrentUserContext); // Obtiene el objeto currentUser
+  const { currentUser, handleUpdateUser, handleUpdateAvatar } = userContext;
+
+  const [name, setName] = useState(currentUser.name); // Agrega la variable de estado para name
+  const [description, setDescription] = useState(currentUser.about); // Agrega la variable de estado para description
+  const [avatar, setAvatar] = useState(currentUser.avatar);
+  const handleNameChange = (event) => {
+    setName(event.target.value); // Actualiza name cuando cambie la entrada
+  };
+
+  const handleDescriptionChange = (event) => {
+    setDescription(event.target.value); // Actualiza description cuando cambie la entrada
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault(); // Evita el comportamiento predeterminado del envío de formularios
+
+    handleUpdateUser(name, description); // Actualiza la información del usuario
+  };
+
+  return (
+    <form
+      className="popup__form"
+      name="profile-form"
+      id="edit-profile-form"
+      noValidate
+      onSubmit={handleSubmit}
+    >
+      <label className="popup__label">
+        <input
+          className="popup__input popup__input_type_name"
+          id="owner-name"
+          maxLength="40"
+          minLength="2"
+          name="userName"
+          placeholder="Name"
+          required
+          type="text"
+          value={name} // Bind name to input
+          onChange={handleNameChange} // Agrega el controlador onChange
+        />
+        <span className="popup__error" id="owner-name-error"></span>
+      </label>
+      <label className="popup__label">
+        <input
+          className="popup__input popup__input_type_description"
+          id="owner-description"
+          maxLength="200"
+          minLength="2"
+          name="userDescription"
+          placeholder="About me"
+          required
+          type="text"
+          value={description} // Vincula description con la entrada
+          onChange={handleDescriptionChange} // Agrega el controlador onChange
+        />
+        <span className="popup__error" id="owner-description-error"></span>
+      </label>
+      <button className="popup__save" type="submit">
+        Guardar
+      </button>
+    </form>
+  );
 }
