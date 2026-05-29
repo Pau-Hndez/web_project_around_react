@@ -63,12 +63,12 @@ export default function Main() {
             <p className="profile__about-me">{currentUser.about}</p>
           </div>
         </div>
-        <button className="profile__add-button" type="button">
-          <img
-            src={addButton}
-            alt="Agregar"
-            onClick={() => handleOpenPopup(newCardPopup)}
-          />
+        <button
+          className="profile__add-button"
+          type="button"
+          onClick={() => handleOpenPopup(newCardPopup)}
+        >
+          <img src={addButton} alt="Agregar" />
         </button>
       </section>
       <section className="cards content__places">
